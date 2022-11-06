@@ -74,3 +74,133 @@ while ( i < arr.length ) {
     console.log(arr[i]);
     i++;
 }
+
+// function 
+var add = function add (param1, param2) {
+    return param1 + param2;
+}
+
+//arguments
+function f() { return arguments }
+var args = f('a', 'b', 'c');
+args.length
+args[0]
+
+function f(x,y) {
+    console.log(x, y);
+    return toArray(arguments);
+}
+
+//a pattern for initializing 
+function pair(x, y) {
+    x = x || 0;
+    y = y || 0;
+    return [x, y];
+}
+
+//forcing the number args.
+function pair(x, y) {
+    if (arguments.length !== 2) {
+        throw new Error('Need exactly 2 arguments');
+    }
+}
+
+//from args to array
+function toArray(arrayLikeObject) {
+    return Array.prototype.slice.call(arrayLikeObject);
+}
+
+//exception 
+function getPerson(id) {
+    if (id < 0) {
+        throw new Error('ID must noe be negative.')
+    }
+    return {id : id};
+}
+
+function getPersons(ids) {
+    var result = [];
+    ids.forEach(function (id) {
+        try {
+            var person = getPerson(id);
+            result.push(person);
+        } catch (exception) {
+            console.log(exception);
+        }
+    });
+    return result;
+}
+
+//applying strict mode.
+function functionInStrictMode() {
+    'use strict';
+}
+// in strict mode, you should declare vars before using them.
+//like,
+var x = 1, y = 2, z =3;
+//but it would be better,
+var x = 1;
+var y = 2;
+var z = 3;
+
+// scope would be dicided based on function, not block.
+// example is as below.
+function foo () {
+    var x = -512;
+    if (x<0) {
+        var tmp = -x;
+        ///
+    }
+console.log(tmp); //512
+}
+
+//closure.
+//var "start" is connected after createInc function left from the context where it was created.
+function createIncrementor(strat) {
+    return function () {
+        start++;
+        return start;
+    }
+}
+
+//introducing new scope.
+(function () {
+    var tmp = 1; // this variable is not global.
+}());
+
+//application.
+for (var i = 0; i < 5; i++) {
+    (function () {
+        var i2 = i;
+        result.push(function () {return i2 });
+    }());
+}
+
+//generating object.
+//object is a set of perperties.
+'use strict';
+var jane = {
+    name: 'Jane',
+
+    describe: function () {
+        return ' Person name ' + this.name;
+    }
+};
+
+//if you wanna get and set, you can do that! like ..
+jane.name
+jane.name = 'john';
+jane.newProperty = 'abc'; // that is new property :)
+
+// 'in' is checking whether the property exists or not in the object.
+// if not so, 'undefined' will return.
+
+// if you wanna delete property,
+delete jane.newProperty
+
+// ...
+var obj = { 'not an identifier': 123};
+obj['not an identifier']
+
+var obj = {hello : 'world'};
+var x = 'hello';
