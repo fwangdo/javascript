@@ -204,3 +204,39 @@ obj['not an identifier']
 
 var obj = {hello : 'world'};
 var x = 'hello';
+
+// 1.14.3
+// if you extract method, then connection with object disappers
+'use strict';
+
+var jane = {
+    name : 'Jane',
+
+    describe: function () {
+        return 'Person named ' + this.name;
+    }
+}
+
+var func = jane.describe; //impossible
+
+var func2 = jane.describe.bind(jane);
+
+log_hi_to_friends: function () {
+    'use strict';
+    var that = this;
+    this.friends.forEach(function (friend)) {
+        console.log(that.name+' says hi to ' +friend);
+    }
+}
+
+elon: function () {
+    'use strict';
+    this.friends.forEach(function (friend {
+        console.log(this.name+' says hi to '+friend);
+    }))
+}
+
+['a', 'b', 'c'].forEach(
+    function (elem, index) {
+        console.log(index + '. ' + elem);
+    });
